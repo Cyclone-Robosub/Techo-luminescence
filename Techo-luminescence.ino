@@ -20,7 +20,10 @@ void dim_leds () {
   FastLED.show();
 }
 
-void forward_animation (fl::u32 color = DEFAULT_COLOR, int cycle_rate = CYCLE_RATE) {
+void forward_animation (
+  fl::u32 color = DEFAULT_COLOR,
+  int cycle_rate = CYCLE_RATE
+) {
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = color;
     FastLED.show();
@@ -29,7 +32,10 @@ void forward_animation (fl::u32 color = DEFAULT_COLOR, int cycle_rate = CYCLE_RA
   } 
 }
 
-void backward_animation (fl::u32 color = DEFAULT_COLOR, int cycle_rate = CYCLE_RATE) {
+void backward_animation (
+  fl::u32 color = DEFAULT_COLOR,
+  int cycle_rate = CYCLE_RATE
+) {
   for (int i = NUM_LEDS-1; i >= 0; i--) {
     leds[i] = color;
     FastLED.show();
@@ -38,12 +44,19 @@ void backward_animation (fl::u32 color = DEFAULT_COLOR, int cycle_rate = CYCLE_R
   }
 }
 
-void bouncing_animation (fl::u32 color, int cycle_rate) {
+void bouncing_animation (
+  fl::u32 color = DEFAULT_COLOR,
+  int cycle_rate = CYCLE_RATE
+) {
   forward_animation(color, cycle_rate);
   backward_animation(color, cycle_rate);
 }
 
-void twinkle_animation (int spacing = 4, fl::u32 color = DEFAULT_COLOR, int cycle_rate = CYCLE_RATE*2) {
+void twinkle_animation (
+  int spacing = 4, 
+  fl::u32 color = DEFAULT_COLOR, 
+  int cycle_rate = CYCLE_RATE*2
+) {
   int index = 0;  
   int tracker = 0;
   int offset = 0; 
@@ -58,6 +71,26 @@ void twinkle_animation (int spacing = 4, fl::u32 color = DEFAULT_COLOR, int cycl
     dim_leds();
   } 
 }
+
+void heartbeat_animation (
+  char preset = "slow", 
+  fl::u32 color = DEFAULT_COLOR, 
+  int cycle_rate = CYCLE_RATE
+) {}
+
+void pulse_animation (
+  bool inverted = false, 
+  fl::u32 color = DEFAULT_COLOR, 
+  int cycle_rate = CYCLE_RATE
+) {}
+
+void progress_bar_animation (
+  char direction = "center", 
+  bool inverted = false, 
+  fl::u32 color = DEFAULT_COLOR, 
+  int cycle_rate = CYCLE_RATE
+) {}
+
 
 void loop () {
   
