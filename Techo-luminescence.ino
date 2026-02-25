@@ -20,23 +20,27 @@ void dim_leds () {
   FastLED.show();
 }
 
-void forward_animation (
+void projectile_animation (
+  const char* direction = "forward",
   fl::u32 color = DEFAULT_COLOR,
   int cycle_rate = CYCLE_RATE
-) {
-  for (int i = 0; i < NUM_LEDS; i++) {
-    leds[i] = color;
-    FastLED.show();
-    delay(cycle_rate);
-    dim_leds();
-  } 
-}
+) { 
 
-void backward_animation (
-  fl::u32 color = DEFAULT_COLOR,
-  int cycle_rate = CYCLE_RATE
-) {
-  for (int i = NUM_LEDS-1; i >= 0; i--) {
+  int dir;
+  int start;
+  int end;
+
+  if (strcmp(direction, "backward") == 0) {
+    dir = -1; 
+    start = NUM_LEDS - 1;
+    end = 0;
+  } else {
+    dir = 1;
+    start = 0;
+    end = NUM_LEDS - 1;
+  }
+
+  for (int i = start; i != end + dir; i += dir) {
     leds[i] = color;
     FastLED.show();
     delay(cycle_rate);
@@ -48,8 +52,8 @@ void bouncing_animation (
   fl::u32 color = DEFAULT_COLOR,
   int cycle_rate = CYCLE_RATE
 ) {
-  forward_animation(color, cycle_rate);
-  backward_animation(color, cycle_rate);
+  projectile_animation("forward", color, cycle_rate);
+  projectile_animation("backward", color, cycle_rate);
 }
 
 void twinkle_animation (
