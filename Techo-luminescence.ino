@@ -1,5 +1,5 @@
 #include <FastLED.h>
-#define NUM_LEDS 20
+#define NUM_LEDS 16
 #define LED_PIN 2
 #define CYCLE_RATE 100
 #define DEFAULT_COLOR CRGB::White
@@ -98,10 +98,9 @@ void progress_bar_animation (
 
 void loop () {
   
-  // forward_animation();
-  // backward_animation();
-  // bouncing_animation(CRGB::Blue, 50);
-  twinkle_animation();
+  // projectile_animation("backward");
+  // bouncing_animation();
+  // twinkle_animation();
 
   // leds[0] = CRGB::Red;
   // leds[0].maximizeBrightness();
