@@ -3,6 +3,7 @@
 #define LED_PIN 2
 #define CYCLE_RATE 100
 #define DEFAULT_COLOR CRGB::White
+#define PI 3.14259
 
 CRGB leds[NUM_LEDS];
 
@@ -99,7 +100,24 @@ void pulse_animation (
   bool inverted = false, 
   fl::u32 color = DEFAULT_COLOR, 
   int cycle_rate = CYCLE_RATE
-) {}
+) {
+  
+  volatile float intensity;
+  volatile float cycle_index = 0;
+  
+  while (cycle_index < 2 * PI) {
+    intensity = abs(sin(cycle_index)) * 20;
+    cycle_index += PI / 32; 
+
+    for (int i = 0; i < NUM_LEDS; i++) {
+      leds[i] = color; 
+      FastLED.setBrightness(intensity);
+    }
+    FastLED.show();
+    delay(cycle_rate);
+  }
+  // for (int i = 0, )
+}
 
 void progress_bar_animation (
   char direction = "center", 
@@ -115,7 +133,8 @@ void loop () {
   // bouncing_animation();
   // twinkle_animation();
 
-  heartbeat_animation();
+  // heartbeat_animation();
+  pulse_animation();
 
   // leds[0] = CRGB::Red;
   // leds[0].maximizeBrightness();
