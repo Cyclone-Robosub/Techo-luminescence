@@ -112,14 +112,14 @@ void pulse_animation (
     } else {
       intensity = abs(sin(cycle_index)) * MAX_INTENSITY;
     }
-    cycle_index += PI / 32; 
+    cycle_index += PI / 64; 
 
     for (int i = 0; i < NUM_LEDS; i++) {
       leds[i] = color; 
       FastLED.setBrightness(intensity);
     }
     FastLED.show();
-    delay(cycle_rate/2);
+    delay(cycle_rate/4);
   }
   // for (int i = 0, )
 }
@@ -160,7 +160,7 @@ void progress_bar_animation (
   char direction = "center", 
   bool inverted = false, 
   fl::u32 color = DEFAULT_COLOR, 
-  int cycle_rate = CYCLE_RATE/2
+  int cycle_rate = CYCLE_RATE/16
 ) {
   for (int i = 0; i < 100; i++) {
     progress_bar(i * 0.01);
@@ -181,9 +181,9 @@ void loop () {
 
   // heartbeat_animation();
   // pulse_animation(true);
-  // pulse_animation();
+  pulse_animation();
   // progress_bar(0.70);
-  progress_bar_animation();
+  // progress_bar_animation();
 
   // leds[0] = CRGB::Red;
   // leds[0].maximizeBrightness();
