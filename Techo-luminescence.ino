@@ -3,13 +3,14 @@
 #define LED_PIN 2
 #define CYCLE_RATE 100
 #define DEFAULT_COLOR CRGB::White
-#define PI 3.14259
+#define MAX_INTENSITY 20
+#define PI 3.14
 
 CRGB leds[NUM_LEDS];
 
 void setup () {
   FastLED.addLeds<WS2812B, LED_PIN, GRB>(leds, NUM_LEDS);
-  FastLED.setBrightness(30);
+  FastLED.setBrightness(MAX_INTENSITY);
   delay(2000);
 }
 
@@ -106,7 +107,11 @@ void pulse_animation (
   volatile float cycle_index = 0;
   
   while (cycle_index < 2 * PI) {
-    intensity = abs(sin(cycle_index)) * 20;
+    if (inverted) {
+      intensity = (-1* abs(sin(cycle_index)) + 1) * MAX_INTENSITY;
+    } else {
+      intensity = abs(sin(cycle_index)) * MAX_INTENSITY;
+    }
     cycle_index += PI / 32; 
 
     for (int i = 0; i < NUM_LEDS; i++) {
@@ -114,7 +119,7 @@ void pulse_animation (
       FastLED.setBrightness(intensity);
     }
     FastLED.show();
-    delay(cycle_rate);
+    delay(cycle_rate/2);
   }
   // for (int i = 0, )
 }
@@ -134,6 +139,7 @@ void loop () {
   // twinkle_animation();
 
   // heartbeat_animation();
+  // pulse_animation(true);
   pulse_animation();
 
   // leds[0] = CRGB::Red;
