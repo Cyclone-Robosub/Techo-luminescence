@@ -77,10 +77,23 @@ void twinkle_animation (
 }
 
 void heartbeat_animation (
-  char preset = "slow", 
+  // char preset = "slow", 
+  // fl::u32 color = CRGB::Red, 
   fl::u32 color = DEFAULT_COLOR, 
-  int cycle_rate = CYCLE_RATE
-) {}
+  int cycle_rate = CYCLE_RATE * 8
+) {
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i] = color; 
+  }
+  FastLED.show(); 
+  delay(cycle_rate);
+
+  for (int i = 0; i < NUM_LEDS; i++) {
+    leds[i] = CRGB::Black; 
+  }
+  FastLED.show(); 
+  delay(cycle_rate);
+}
 
 void pulse_animation (
   bool inverted = false, 
@@ -101,6 +114,8 @@ void loop () {
   // projectile_animation("backward");
   // bouncing_animation();
   // twinkle_animation();
+
+  heartbeat_animation();
 
   // leds[0] = CRGB::Red;
   // leds[0].maximizeBrightness();
